@@ -1,15 +1,18 @@
+using BookManagement.Application;
+using BookManagement.Infrastructure;
 using BookManagement.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
-using BookManagement.Infrastructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<ApplicationDatabaseContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddDbContext<DatabaseContext>(options =>
+//options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddInInfrastructureServices(builder.Configuration);
+builder.Services.AddInApplicationServices();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

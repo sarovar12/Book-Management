@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookManagement.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDatabaseContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20240107135316_FixingForeignKey")]
     partial class FixingForeignKey
     {
