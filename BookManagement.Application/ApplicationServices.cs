@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using BookManagement.Application.Manager.ImplementingManager;
+using BookManagement.Application.Manager.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookManagement.Application
@@ -7,6 +8,7 @@ namespace BookManagement.Application
     {
         public static IServiceCollection AddInApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IBookManager, BookManager>();
             return services;
         }
     }

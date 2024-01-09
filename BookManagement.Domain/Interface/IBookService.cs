@@ -3,7 +3,7 @@
 using BookManagement.Domain.Entities;
 
 
-namespace BookManagement.Application.Interface
+namespace BookManagement.Domain.Interface
 {
     public interface IBookService
     {

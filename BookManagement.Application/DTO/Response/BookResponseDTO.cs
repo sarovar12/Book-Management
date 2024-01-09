@@ -1,5 +1,7 @@
 ﻿
 
+using BookManagement.Domain.Enum;
+
 namespace BookManagement.Application.DTO.Response
 {
     public class BookResponseDTO
@@ -7,6 +9,7 @@ namespace BookManagement.Application.DTO.Response
         public int BookId { get; set; }
         public string BookName { get; set; }
         public string BookAuthor { get; set; }
+        public BookAvailable BookStatus { get; set; }
         public string BookDescription { get; set; }
         public int BookQuantity { get; set; }
 

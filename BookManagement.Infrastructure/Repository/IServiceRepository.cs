@@ -16,7 +16,7 @@ namespace BookManagement.Infrastructure.Repository
 
         Task<bool> RemoveRangeAsync(List<t> model);
 
-        Task<int> RemoveAsync(t model);
+        Task<bool> RemoveAsync(t model);
 
 
 
