@@ -8,9 +8,9 @@ namespace BookManagement.Application.Manager.Interfaces
     public interface IStudentManager
     {
         Task<ServiceResult<bool>> CreateStudent(StudentRequestDTO studentRequestDTO);
-        Task<List<ServiceResult<StudentResponseDTO>>> GetStudents();
-        Task<ServiceResult<StudentResponseDTO>> GetStudentByID(int id);
-        Task<ServiceResult<bool>> UpdateStudent(StudentResponseDTO Student);
-        Task<ServiceResult<bool>> DeleteStudent(int id);
+        Task<ServiceResult<List<StudentResponseDTO>>> GetStudents();
+        Task<ServiceResult<StudentResponseDTO>> GetStudentByID(Guid id);
+        Task<ServiceResult<bool>> UpdateStudent(StudentResponseDTO student);
+        Task<ServiceResult<bool>> DeleteStudent(Guid id);
     }
 }

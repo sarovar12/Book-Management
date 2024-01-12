@@ -5,12 +5,6 @@ using BookManagement.Application.Manager.Interfaces;
 using BookManagement.Domain.Entities;
 using BookManagement.Domain.Interface;
 using BookManagement.Infrastructure.Services;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static BookManagement.Infrastructure.Services.Common;
 
 namespace BookManagement.Application.Manager.ImplementingManager
@@ -48,7 +42,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
             catch
             {
                 serviceResult.Status = StatusType.Failure;
-                serviceResult.Message = "An error occurred while adding the book";
+                serviceResult.Message = "Error occurred while adding the book";
                 serviceResult.Data = false;
                 return serviceResult;
 
@@ -83,7 +77,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
             catch (Exception ex)
             {
                 serviceResult.Status = StatusType.Failure;
-                serviceResult.Message = "An error occurred while deleting the book";
+                serviceResult.Message = "Error occurred while deleting the book";
                 serviceResult.Data = false;
 
                 return serviceResult;
@@ -114,7 +108,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
             catch (Exception ex)
             {
                 serviceResult.Status = StatusType.Failure;
-                serviceResult.Message = "An error occurred while retrieving the book";
+                serviceResult.Message = "Error occurred while retrieving the book";
                 serviceResult.Data = null;
 
                 return serviceResult;
@@ -151,7 +145,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
             catch (Exception ex)
             {
                 serviceResult.Status = StatusType.Failure;
-                serviceResult.Message = "An error occurred while retrieving the books";
+                serviceResult.Message = "Error occurred while retrieving the books";
                 serviceResult.Data = null;
 
                 return serviceResult;
@@ -184,7 +178,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
             catch
             {
                 serviceResult.Status = StatusType.Failure;
-                serviceResult.Message = "An error occurred while retrieving the books";
+                serviceResult.Message = "Error occurred while retrieving the books";
                 serviceResult.Data = false;
 
                 return serviceResult;

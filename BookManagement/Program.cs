@@ -15,8 +15,6 @@ builder.Services.AddControllers();
 builder.Services.AddInInfrastructureServices(builder.Configuration);
 builder.Services.AddInApplicationServices();
 
-
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -47,3 +45,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+//NEXT MIGRATION MA REMOVE MODEL BATA DATECREATE WAALA = , NOT SURE BUT I THINK IT'LL GIVE NEW VALUE EVERY TIME

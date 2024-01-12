@@ -9,6 +9,8 @@ namespace BookManagement.Application
         public static IServiceCollection AddInApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IBookManager, BookManager>();
+            services.AddScoped<IIssueManager, IssueManager>();
+            services.AddScoped<IStudentManager, StudentManager>();
             return services;
         }
     }

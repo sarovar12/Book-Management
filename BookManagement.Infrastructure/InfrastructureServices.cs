@@ -16,6 +16,8 @@ namespace BookManagement.Infrastructure
             services.AddScoped<IServiceFactory, ServiceFactory>();
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]));
             services.AddScoped<IBookService, BookServices>();
+            services.AddScoped<IStudentService, StudentServices>();
+            services.AddScoped<IIssueService,IssueServices>();
             return services;
         }
     }

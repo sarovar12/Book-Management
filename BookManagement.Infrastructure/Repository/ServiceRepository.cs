@@ -3,7 +3,7 @@
 
 namespace BookManagement.Infrastructure.Repository
 {
-    public class ServiceRepository<t> : IServiceRepository<t>, IDisposable where t : class
+    public class ServiceRepository<t> : IServiceRepository<t> where t : class
     {
         DatabaseContext db;
         DbSet<t> entity;
@@ -52,12 +52,13 @@ namespace BookManagement.Infrastructure.Repository
             }
         }
 
-        public void Dispose()
+        public async Task<t> FindAsync(int id)
         {
-            throw new NotImplementedException();
+            var newEntity = await entity.FindAsync(id);
+            return newEntity;
         }
 
-        public async Task<t> FindAsync(int id)
+        public async Task<t> FindAsync(Guid id)
         {
             var newEntity = await entity.FindAsync(id);
             return newEntity;
@@ -111,7 +112,7 @@ namespace BookManagement.Infrastructure.Repository
        
     }
 
-    public class ServiceFactory : IDisposable, IServiceFactory
+    public class ServiceFactory : IServiceFactory
     {
         public DatabaseContext db;
         public bool _isforTest;
@@ -126,16 +127,7 @@ namespace BookManagement.Infrastructure.Repository
             this.db = db;
             this._isforTest = isforTest;
         }
-        public void Dispose()
-        {
-            if (!_isforTest)
-            {
-                db.Dispose();
-            }
-            // throw new NotImplementedException();
-            //  db.Dispose();
-        }
-        public IServiceRepository<t> GetInstance<t>() where t : class
+          public IServiceRepository<t> GetInstance<t>() where t : class
         {
             return new ServiceRepository<t>(db);
         }

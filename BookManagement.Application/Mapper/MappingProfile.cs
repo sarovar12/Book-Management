@@ -13,6 +13,8 @@ namespace BookManagement.Application.Mapper
         {
             CreateMap<Book, BookRequestDTO>().ReverseMap();
             CreateMap<Book, BookResponseDTO>().ReverseMap();
+            CreateMap<Student, StudentRequestDTO>().ReverseMap();
+            CreateMap<Student, StudentResponseDTO>().ReverseMap();
             
         }
     }

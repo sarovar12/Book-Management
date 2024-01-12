@@ -1,25 +1,26 @@
 ﻿using BookManagement.Application.DTO.Request;
+using BookManagement.Application.DTO.Response;
+using BookManagement.Application.Manager.ImplementingManager;
 using BookManagement.Application.Manager.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using BookManagement.Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookController : ControllerBase
+    public class StudentController : ControllerBase
     {
-        private readonly IBookManager _bookManager;
-        public BookController(IBookManager bookManager)
+        private readonly IStudentManager _studentManager;
+        public StudentController(IStudentManager studentManager)
         {
-            _bookManager = bookManager;
+            _studentManager = studentManager;
 
         }
-
         [HttpPost]
-        public async Task<IActionResult> AddBook(BookRequestDTO bookRequestDTO)
+        public async Task<IActionResult> AddStudent(StudentRequestDTO studentRequestDTO)
         {
-            var result = await _bookManager.AddBook(bookRequestDTO);
+            var result = await _studentManager.CreateStudent(studentRequestDTO);
             if (result.Status == StatusType.Success)
             {
                 return Ok(result.Message);
@@ -28,9 +29,9 @@ namespace BookManagement.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBook(int id)
+        public async Task<IActionResult> DeleteStudent(Guid id)
         {
-            var result = await _bookManager.DeleteBook(id);
+            var result = await _studentManager.DeleteStudent(id);
             if (result.Status == StatusType.Success)
             {
                 return Ok(result.Message);
@@ -40,9 +41,9 @@ namespace BookManagement.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBookById(int id)
+        public async Task<IActionResult> GetStudentById(Guid id)
         {
-            var result = await _bookManager.GetBookById(id);
+            var result = await _studentManager.GetStudentByID(id);
             if (result.Status == StatusType.Success)
             {
                 return Ok(result.Data);
@@ -52,9 +53,9 @@ namespace BookManagement.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetBooks()
+        public async Task<IActionResult> GetStudents()
         {
-            var result = await _bookManager.GetBooks();
+            var result = await _studentManager.GetStudents();
             if (result.Status == StatusType.Success)
             {
                 return Ok(result.Data);
@@ -64,14 +65,14 @@ namespace BookManagement.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBook(int id, BookRequestDTO bookRequestDTO)
+        public async Task<IActionResult> UpdateStudent(Guid id, StudentResponseDTO studentResponseDTO)
         {
-            if (id != bookRequestDTO.BookId)
+            if (id != studentResponseDTO.StudentId)
             {
-                return BadRequest("Invalid book ID");
+                return BadRequest("Invalid Student ID");
             }
 
-            var result = await _bookManager.UpdateBook(bookRequestDTO);
+            var result = await _studentManager.UpdateStudent(studentResponseDTO);
 
             if (result.Status == StatusType.Success)
             {
@@ -80,6 +81,7 @@ namespace BookManagement.Controllers
 
             return NotFound(result.Message);
         }
+
 
     }
 }

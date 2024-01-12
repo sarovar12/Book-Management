@@ -7,8 +7,8 @@ namespace BookManagement.Domain.Interface
     {
         Task<bool> CreateStudent(Student student);
         Task<List<Student>> GetStudents();
-        Task<Student> GetStudentByID(int id);
-        Task<bool> UpdateStudent(Student Student);
-        Task<bool> DeleteStudent(int id);
+        Task<Student> GetStudentByID(Guid id);
+        Task<bool> UpdateStudent(Student student);
+        Task<bool> DeleteStudent(Guid id);
     }
 }
