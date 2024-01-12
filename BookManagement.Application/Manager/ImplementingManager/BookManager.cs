@@ -90,19 +90,106 @@ namespace BookManagement.Application.Manager.ImplementingManager
             }
         }
 
-        public Task<ServiceResult<BookResponseDTO>> GetBookById(int id)
+        public async Task<ServiceResult<BookResponseDTO>> GetBookById(int id)
         {
-            throw new NotImplementedException();
+            var serviceResult = new ServiceResult<BookResponseDTO>();
+            try
+            {
+                var book = await _service.GetBookById(id);
+                if (book == null)
+                {
+                    serviceResult.Status = StatusType.Failure;
+                    serviceResult.Message = "Book not found";
+                    serviceResult.Data = null;
+                    return serviceResult;
+                }
+                var bookResponse = _mapper.Map<BookResponseDTO>(book);
+
+                serviceResult.Status = StatusType.Success;
+                serviceResult.Message = "Book retrieved successfully";
+                serviceResult.Data = bookResponse;
+
+                return serviceResult;
+            }
+            catch (Exception ex)
+            {
+                serviceResult.Status = StatusType.Failure;
+                serviceResult.Message = "An error occurred while retrieving the book";
+                serviceResult.Data = null;
+
+                return serviceResult;
+
+            }
         }
 
-        public Task<ServiceResult<List<BookResponseDTO>>> GetBooks()
+        public async Task<ServiceResult<List<BookResponseDTO>>> GetBooks()
         {
-            throw new NotImplementedException();
+            var serviceResult = new ServiceResult<List<BookResponseDTO>>();
+
+            try
+            {
+                var books = await _service.GetBooks();
+                var result = (from book in books
+                              where book.DateDeleted == null
+                              select new BookResponseDTO()
+                              {
+                                  BookId = book.BookId,
+                                  BookAuthor = book.BookAuthor,
+                                  BookName = book.BookName,
+                                  BookDescription = book.BookDescription,
+                                  BookStatus = book.BookStatus,
+                                  BookQuantity = book.BookQuantity,
+
+                              }).ToList();
+
+                serviceResult.Status = StatusType.Success;
+                serviceResult.Message = "Books retrieved successfully";
+                serviceResult.Data = result;
+
+                return serviceResult;
+            }
+            catch (Exception ex)
+            {
+                serviceResult.Status = StatusType.Failure;
+                serviceResult.Message = "An error occurred while retrieving the books";
+                serviceResult.Data = null;
+
+                return serviceResult;
+            }
         }
 
-        public Task<ServiceResult<bool>> UpdateBooks(BookRequestDTO bookRequestDTO)
+
+
+        public async Task<ServiceResult<bool>> UpdateBook(BookRequestDTO bookRequestDTO)
         {
-            throw new NotImplementedException();
+            var serviceResult = new ServiceResult<bool>();
+            try
+            {
+                var book = await _service.GetBookById(bookRequestDTO.BookId);
+                if (book == null)
+                {
+                    serviceResult.Status = StatusType.Failure;
+                    serviceResult.Message = "Book could not be found";
+                    serviceResult.Data = false;
+                    return serviceResult;
+                }
+                _mapper.Map(bookRequestDTO,book);
+                var result = _service.UpdateBookStatus(book);
+                serviceResult.Status = StatusType.Success;
+                serviceResult.Message = "Book Update Sucessfully";
+                serviceResult.Data = true;
+                return serviceResult;
+
+            }
+            catch
+            {
+                serviceResult.Status = StatusType.Failure;
+                serviceResult.Message = "An error occurred while retrieving the books";
+                serviceResult.Data = false;
+
+                return serviceResult;
+
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using BookManagement.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class ApplicationDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240112071155_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,13 +25,10 @@ namespace BookManagement.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookManagement.Domains.Entities.Book", b =>
+            modelBuilder.Entity("BookManagement.Domain.Entities.Book", b =>
                 {
                     b.Property<int>("BookId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookId"));
 
                     b.Property<string>("BookAuthor")
                         .IsRequired()
@@ -45,6 +45,9 @@ namespace BookManagement.Infrastructure.Migrations
                     b.Property<int>("BookQuantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("BookStatus")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -56,7 +59,7 @@ namespace BookManagement.Infrastructure.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("BookManagement.Domains.Entities.Issue", b =>
+            modelBuilder.Entity("BookManagement.Domain.Entities.Issue", b =>
                 {
                     b.Property<Guid>("IssueId")
                         .ValueGeneratedOnAdd()
@@ -95,7 +98,7 @@ namespace BookManagement.Infrastructure.Migrations
                     b.ToTable("Issues");
                 });
 
-            modelBuilder.Entity("Bookstore.Domains.Entities.Student", b =>
+            modelBuilder.Entity("BookManagement.Domain.Entities.Student", b =>
                 {
                     b.Property<Guid>("StudentId")
                         .ValueGeneratedOnAdd()
@@ -126,15 +129,15 @@ namespace BookManagement.Infrastructure.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("BookManagement.Domains.Entities.Issue", b =>
+            modelBuilder.Entity("BookManagement.Domain.Entities.Issue", b =>
                 {
-                    b.HasOne("BookManagement.Domains.Entities.Book", "Book")
+                    b.HasOne("BookManagement.Domain.Entities.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Bookstore.Domains.Entities.Student", "Student")
+                    b.HasOne("BookManagement.Domain.Entities.Student", "Student")
                         .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -71,12 +71,15 @@ namespace BookManagement.Infrastructure.Services
             {
                 var service = _factory.GetInstance<Book>();
                 var bookData = await service.FindAsync(book.BookId);
-                if (bookData == null || !bookData.DateDeleted.HasValue )
+                if (bookData == null || bookData.DateDeleted.HasValue )
                 {
                     return false;
                 }
                 bookData.BookName = book.BookName;
                 bookData.BookDescription = book.BookDescription;
+                bookData.BookAuthor = book.BookAuthor;
+                bookData.BookQuantity = book.BookQuantity;
+                bookData.BookStatus = book.BookStatus;
 
                 
 

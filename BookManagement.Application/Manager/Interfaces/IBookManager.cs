@@ -10,6 +10,6 @@ namespace BookManagement.Application.Manager.Interfaces
         Task<ServiceResult<bool>> DeleteBook(int id);
         Task<ServiceResult<BookResponseDTO>> GetBookById(int id);
         Task<ServiceResult<List<BookResponseDTO>>> GetBooks();
-        Task<ServiceResult<bool>> UpdateBooks(BookRequestDTO bookRequestDTO);
+        Task<ServiceResult<bool>> UpdateBook(BookRequestDTO bookRequestDTO);
     }
 }
