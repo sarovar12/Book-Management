@@ -10,7 +10,7 @@ namespace BookManagement.Application.Manager.Interfaces
         Task<ServiceResult<bool>> DeleteIssue(Guid id);
         Task<ServiceResult<IssueResponseDTO>> GetIssueById(Guid id);
         Task<ServiceResult<List<IssueResponseDTO>>> GetIssues();
-        Task<ServiceResult<bool>> UpdateIssue(IssueResponseDTO issueResponseDTO);
+        Task<ServiceResult<bool>> UpdateIssue(IssueUpdateResponseDTO issueResponseDTO);
         Task<ServiceResult<bool>> ReturnIssuedBook(IssueResponseDTO issueResponseDTO);
     }
 }

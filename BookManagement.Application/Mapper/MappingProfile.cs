@@ -15,6 +15,9 @@ namespace BookManagement.Application.Mapper
             CreateMap<Book, BookResponseDTO>().ReverseMap();
             CreateMap<Student, StudentRequestDTO>().ReverseMap();
             CreateMap<Student, StudentResponseDTO>().ReverseMap();
+            CreateMap<Issue, IssueRequestDTO>().ReverseMap();
+            CreateMap<Issue,IssueResponseDTO>().ReverseMap();
+            CreateMap<IssueUpdateResponseDTO, Issue>().ReverseMap();
             
         }
     }

@@ -133,6 +133,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
                                   Fine = issue.Fine,
                                   BookId = issue.BookId,
                                   ExpectedReturnDate = issue.ExpectedReturnDate,
+                                  StudentId = issue.StudentId,  
                               }).ToList();
 
                 serviceResult.Status = StatusType.Success;
@@ -156,7 +157,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceResult<bool>> UpdateIssue(IssueResponseDTO issueRequestDTO)
+        public async Task<ServiceResult<bool>> UpdateIssue(IssueUpdateResponseDTO issueRequestDTO)
         {
             var serviceResult = new ServiceResult<bool>();
             try
