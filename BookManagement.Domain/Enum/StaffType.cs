@@ -2,8 +2,8 @@
 {
     public enum StaffType
     {
-        Administrator,
-        LibraryStaff
+        Administrator =0,
+        LibraryStaff =1
 
     }
 }

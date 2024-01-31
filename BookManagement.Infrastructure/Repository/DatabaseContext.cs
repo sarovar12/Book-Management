@@ -1,4 +1,5 @@
 ﻿using BookManagement.Domain.Entities;
+using BookManagement.Domain.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -30,12 +31,10 @@ namespace BookManagement.Infrastructure.Repository
 
             }
         }
-
         public DbSet<Book> Books { get; set; }
         public DbSet<Issue> Issues { get; set; }
         public DbSet<Student> Students { get; set; }
-
-
+        public DbSet<Staff> Staffs { get; set; }
 
     }
 }

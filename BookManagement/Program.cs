@@ -3,6 +3,11 @@ using BookManagement.Application;
 using BookManagement.Infrastructure;
 using BookManagement.Application.Mapper;
 using BookManagement.Infrastructure.Mapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using BookManagement.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<DatabaseContext>(options =>
 //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddInInfrastructureServices(builder.Configuration);
 builder.Services.AddInApplicationServices();
@@ -40,6 +46,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
