@@ -18,6 +18,7 @@ namespace BookManagement.Infrastructure
             services.AddScoped<IBookService, BookServices>();
             services.AddScoped<IStudentService, StudentServices>();
             services.AddScoped<IIssueService, IssueServices>();
+            services.AddScoped<IStaffService, StaffServices>();
             return services;
         }
     }

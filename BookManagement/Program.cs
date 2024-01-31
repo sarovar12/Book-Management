@@ -3,13 +3,16 @@ using BookManagement.Application;
 using BookManagement.Infrastructure;
 using BookManagement.Application.Mapper;
 using BookManagement.Infrastructure.Mapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using BookManagement.Domain.Entities;
-using Microsoft.AspNetCore.Identity;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddMvc().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+});
 
 // Add services to the container.
 
@@ -53,5 +56,3 @@ app.MapControllers();
 
 app.Run();
 
-
-//NEXT MIGRATION MA REMOVE MODEL BATA DATECREATE WAALA = , NOT SURE BUT I THINK IT'LL GIVE NEW VALUE EVERY TIME

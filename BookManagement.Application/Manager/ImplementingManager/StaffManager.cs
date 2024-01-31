@@ -193,7 +193,6 @@ namespace BookManagement.Application.Manager.ImplementingManager
                 serviceResult.Status = StatusType.Failure;
                 serviceResult.Message = "Error occurred while retrieving the books";
                 serviceResult.Data = false;
-
                 return serviceResult;
 
             }
