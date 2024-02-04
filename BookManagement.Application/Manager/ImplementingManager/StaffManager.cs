@@ -147,6 +147,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
                                      {
                                          StaffId = staff.StaffId,
                                          Username = staff.Username,
+                                         StaffType = staff.StaffType
                                      }).ToList();
 
                 serviceResult.Status = StatusType.Success;

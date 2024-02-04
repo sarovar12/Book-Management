@@ -1,6 +1,5 @@
 ﻿using BookManagement.Application.DTO.Request;
 using BookManagement.Application.DTO.Response;
-using BookManagement.Application.Manager.ImplementingManager;
 using BookManagement.Application.Manager.Interfaces;
 using BookManagement.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;

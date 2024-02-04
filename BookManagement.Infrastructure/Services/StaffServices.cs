@@ -1,11 +1,6 @@
 ﻿using BookManagement.Domain.Entities;
 using BookManagement.Domain.Interface;
 using BookManagement.Infrastructure.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookManagement.Infrastructure.Services
 {
@@ -80,8 +75,6 @@ namespace BookManagement.Infrastructure.Services
                 }
                 staffData.StaffType = staff.StaffType;
                 staffData.Username = staff.Username;
-                staffData.Password = staff.Password;
-
                 await service.UpdateAsync(staffData);
                 return true;
             }

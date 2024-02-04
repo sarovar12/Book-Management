@@ -12,6 +12,7 @@ namespace BookManagement.Application
             services.AddScoped<IIssueManager, IssueManager>();
             services.AddScoped<IStudentManager, StudentManager>();
             services.AddScoped<IStaffManager, StaffManager>();
+            services.AddScoped<ILoginManager, LoginManager>();
             return services;
         }
     }
