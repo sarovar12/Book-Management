@@ -46,9 +46,6 @@ namespace BookManagement.Application.Manager.ImplementingManager
 
                 }
                 var claims = new[] {
-                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                         new Claim("Username", staff.Username.ToString()),
                         new Claim(ClaimTypes.Role, staff.StaffType.ToString()),
                         new Claim("staffId", staff.StaffId.ToString())

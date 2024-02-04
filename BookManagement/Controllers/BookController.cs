@@ -2,9 +2,11 @@
 using BookManagement.Application.Manager.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BookManagement.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookManagement.Controllers
 {
+    [Authorize(Roles ="Staff")]
     [Route("api/[controller]")]
     [ApiController]
     public class BookController : ControllerBase
@@ -51,6 +53,7 @@ namespace BookManagement.Controllers
 
         }
 
+       
         [HttpGet]
         public async Task<IActionResult> GetBooks()
         {
