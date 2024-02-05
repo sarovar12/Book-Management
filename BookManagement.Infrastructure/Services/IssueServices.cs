@@ -79,6 +79,7 @@ namespace BookManagement.Infrastructure.Services
                 issueData.IsAvailable = issue.IsAvailable;
                 issueData.Fine = issue.Fine;
                 issueData.DateDeleted = issue.DateDeleted;
+                issueData.IssuerName = issue.IssuerName;
                 await service.UpdateAsync(issueData);
                 return true;
             }

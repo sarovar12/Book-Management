@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookManagement.Application.DTO.Request
+﻿namespace BookManagement.Application.DTO.Request
 {
     public class IssueRequestDTO
     {
@@ -13,6 +7,7 @@ namespace BookManagement.Application.DTO.Request
         public DateTime? ReturnedDate { get; set; }
         public int IsAvailable { get; set; }
         public double Fine { get; set; }
+
 
     }
 }

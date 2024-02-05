@@ -13,6 +13,7 @@ namespace BookManagement.Application.DTO.Response
         public double Fine { get; set; }
         public int BookId { get; set; }
         public Guid StudentId { get; set; }
+        public string IssuerName { get; set; }
 
         //Navigation Property 
         public BookNavigationDTO Book {  get; set; }

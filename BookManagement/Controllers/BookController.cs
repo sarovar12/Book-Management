@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BookManagement.Controllers
 {
-    [Authorize(Roles ="Staff")]
+    [Authorize(Roles ="Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class BookController : ControllerBase

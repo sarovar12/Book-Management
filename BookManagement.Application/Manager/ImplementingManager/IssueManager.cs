@@ -27,7 +27,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
         public async Task<ServiceResult<bool>> AddIssue(IssueRequestDTO issueRequestDTO)
         {
             var serviceResult = new ServiceResult<bool>();
-      
+            string username = JwtTokenServices.GetUsernameFromToken(_httpContextAccessor.HttpContext);
             try
             {
                 var issueDomain = new Issue()
@@ -36,6 +36,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
                     StudentId = issueRequestDTO.StudentId,
                     Fine = issueRequestDTO.Fine,
                     IsAvailable = issueRequestDTO.IsAvailable,
+                    IssuerName = username
                 };
                 var data = await _service.AddIssuedService(issueDomain);
                 serviceResult.Status = data ? StatusType.Success : StatusType.Failure;
@@ -124,7 +125,6 @@ namespace BookManagement.Application.Manager.ImplementingManager
         public async Task<ServiceResult<List<IssueResponseDTO>>> GetIssues()
         {
             var serviceResult = new ServiceResult<List<IssueResponseDTO>>();
-            string username = JwtTokenServices.GetUsernameFromToken(_httpContextAccessor.HttpContext);
             try
             {
                 var issues = await _service.GetIssuedServices();
@@ -139,6 +139,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
                                   BookId = issue.BookId,
                                   ExpectedReturnDate = issue.ExpectedReturnDate,
                                   StudentId = issue.StudentId,
+                                  IssuerName = issue.IssuerName
                               }).ToList();
 
                 serviceResult.Status = StatusType.Success;
@@ -165,6 +166,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
         public async Task<ServiceResult<bool>> UpdateIssue(IssueUpdateResponseDTO issueRequestDTO)
         {
             var serviceResult = new ServiceResult<bool>();
+            string username = JwtTokenServices.GetUsernameFromToken(_httpContextAccessor.HttpContext);
             try
             {
                 var issue = await _service.GetIssuedServiceById(issueRequestDTO.IssueId);
@@ -176,6 +178,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
                     return serviceResult;
                 }
                 _mapper.Map(issueRequestDTO, issue);
+                issue.IssuerName = username;
                 var result = _service.UpdateIssuedService(issue);
                 serviceResult.Status = StatusType.Success;
                 serviceResult.Message = "Issue Updated Successfully";

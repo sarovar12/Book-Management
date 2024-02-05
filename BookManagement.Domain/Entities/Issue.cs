@@ -14,6 +14,7 @@ namespace BookManagement.Domain.Entities
         public DateTime? ReturnedDate { get; set; }
         public int IsAvailable { get; set; }
         public double Fine {  get; set; }
+        public string IssuerName { get; set; }
 
         [ForeignKey("Book")]
         public int BookId { get; set; }
