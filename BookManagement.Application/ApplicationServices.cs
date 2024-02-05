@@ -13,6 +13,7 @@ namespace BookManagement.Application
             services.AddScoped<IStudentManager, StudentManager>();
             services.AddScoped<IStaffManager, StaffManager>();
             services.AddScoped<ILoginManager, LoginManager>();
+            services.AddHttpContextAccessor();
             return services;
         }
     }

@@ -26,6 +26,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
         public async Task<ServiceResult<string>> GetJWTToken(LoginRequestDTO loginRequestDTO)
         {
             var serviceResult = new ServiceResult<string>();
+
             try
             {
                 var staff = await _service.GetStaffByUsername(loginRequestDTO.Username);
@@ -74,5 +75,6 @@ namespace BookManagement.Application.Manager.ImplementingManager
             }
 
         }
+
     }
 }

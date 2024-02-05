@@ -2,9 +2,11 @@
 using BookManagement.Application.DTO.Request;
 using BookManagement.Application.DTO.Response;
 using BookManagement.Application.Manager.Interfaces;
+using BookManagement.Application.Utils;
 using BookManagement.Domain.Entities;
 using BookManagement.Domain.Interface;
 using BookManagement.Infrastructure.Services;
+using Microsoft.AspNetCore.Http;
 using static BookManagement.Infrastructure.Services.Common;
 
 namespace BookManagement.Application.Manager.ImplementingManager
@@ -13,16 +15,19 @@ namespace BookManagement.Application.Manager.ImplementingManager
     {
         private readonly IIssueService _service;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public IssueManager(IIssueService issueService, IMapper mapper)
+        public IssueManager(IIssueService issueService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _service = issueService;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
 
         }
         public async Task<ServiceResult<bool>> AddIssue(IssueRequestDTO issueRequestDTO)
         {
             var serviceResult = new ServiceResult<bool>();
+      
             try
             {
                 var issueDomain = new Issue()
@@ -119,7 +124,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
         public async Task<ServiceResult<List<IssueResponseDTO>>> GetIssues()
         {
             var serviceResult = new ServiceResult<List<IssueResponseDTO>>();
-
+            string username = JwtTokenServices.GetUsernameFromToken(_httpContextAccessor.HttpContext);
             try
             {
                 var issues = await _service.GetIssuedServices();
@@ -133,7 +138,7 @@ namespace BookManagement.Application.Manager.ImplementingManager
                                   Fine = issue.Fine,
                                   BookId = issue.BookId,
                                   ExpectedReturnDate = issue.ExpectedReturnDate,
-                                  StudentId = issue.StudentId,  
+                                  StudentId = issue.StudentId,
                               }).ToList();
 
                 serviceResult.Status = StatusType.Success;
